@@ -1,0 +1,22 @@
+{
+  "name": "utrgvcs-schedule-optimizer",
+  "version": "1.0.0",
+  "description": "A web application built to help UTRGV computer science students make smarter, more informed course selections by leveraging real student feedback.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KaceyStarr/utrgvcs-schedule-optimizer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KaceyStarr/utrgvcs-schedule-optimizer/issues"
+  },
+  "homepage": "https://github.com/KaceyStarr/utrgvcs-schedule-optimizer#readme"
+}
