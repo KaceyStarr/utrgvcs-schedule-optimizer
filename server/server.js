@@ -43,55 +43,78 @@ app.get("/home", (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
+  let errors = []
   let username = req.body.username;
   let password = req.body.password;
-  console.log("Username:", username, "Password:", password);
+  // console.log("Username:", username, "Password:", password);
 
   // get the data from the databse
   const data = await db.get(`SELECT * FROM USERBASE WHERE username = ?`, [username])
-  console.log(data);
+  // console.log(data);
 
-  if(data){
-    console.log("its valid")
+  if(!data){
+    console.log("data not found in the database")
+    errors.push("User data could not be found. Try making an account.")
+    return res.render("home", {errors: errors})
+  }
     // compare the encrypted password with the other password
     const compare = await bcrypt.compare(password, data.password)
-
+  
     // if the comparison is true, send them to the dashboard
     if(compare){
       console.log("it worked")
       req.session.user = data;
       res.redirect("/dashboard")
-    } else {
-      return res.send("something went wrong")
+    } 
+    
+    else {
+      errors.push("Incorrect password. Try again.")
+      return res.render("home", {errors: errors})
     }
-  }
+  
 });
 
 
 app.post("/register", async (req, res)=>{
-
+  let errors = [];
   let username = req.body.register_username;
   let password = req.body.register_password;
   let confirm = req.body.con_register_password;
 
   if(password != confirm){
-    return res.send("passwords don't match!")
+    errors.push("passwords don't match!")
+    return res.render("home", {errors: errors})
   } else {
-    
+    var data = await db.get(`SELECT * FROM USERBASE WHERE username = ?`, [username])
+    if(data){
+      errors.push("User already exists")
+      return res.render("home", {errors: errors})
+    }
     // console.log(username);
     // console.log(password);
     let hash = await bcrypt.hash(password, 10);
     const record = await db.run(`INSERT INTO USERBASE (username, password) VALUES (?, ?)`, [username, hash])
-    return res.send("done!")
+    var data = await db.get(`SELECT * FROM USERBASE WHERE username = ?`, [username])
+    req.session.user = data;
+    return res.redirect("/dashboard")
   }
 
 })
 
 app.get("/dashboard", (req, res) => {
+  
   const user = req.session.user
+  if(!user){
+    return res.redirect("/home")
+  }
   return res.render("dashboard", { username: user.username });
 });
 
+
+app.get("/logout", (req, res) => {
+  delete req.session.user;
+  return res.redirect("/home");
+})
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

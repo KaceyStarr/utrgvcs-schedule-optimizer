@@ -10,6 +10,19 @@
 
 </head>
     <body>
+        
+        <!-- This is the error text, you might want to put that in a modal -->
+        <% if (locals.errors) { %>
+             <!-- text for the error -->
+            <p class="block"> 
+            <% for (let error of errors) { %>
+                    <%= error %>
+            <% } %>
+            </p>
+        <% } %>
+
+
+
 
         <p>This is the landing page</p>
 
