@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+    <body>
+        <p>This is the main dashboard</p>
+        <p> welcome, <%= username %> </p>
+        <p>Here goes idk</p>
+
+
+
+        <button id="logout" type="button">Logout</button>
+
+
+
+    <script>
+
+        document.getElementById("logout").addEventListener("click", () => {
+            console.log("asdasd");
+            location.href = "/logout";
+        });
+
+    </script>
+    </body>
+</html>

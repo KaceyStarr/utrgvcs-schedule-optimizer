@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+
+</head>
+    <body>
+        
+        <!-- This is the error text, you might want to put that in a modal -->
+        <% if (locals.errors) { %>
+             <!-- text for the error -->
+            <p class="block"> 
+            <% for (let error of errors) { %>
+                    <%= error %>
+            <% } %>
+            </p>
+        <% } %>
+
+
+
+
+        <p>This is the landing page</p>
+
+        <div>
+
+                    <!-- Log in modal https://getbootstrap.com/docs/5.0/components/modal/ -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginmodal">
+                        Log in
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="loginmodal" tabindex="-1" aria-labelledby="loginmodallabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="loginmodallabel">Log in</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <form id="loginForm" method="POST" action="/login">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input name="username" type="text" class="form-control" id="username" placeholder="Enter username" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input name="password" type="password" class="form-control" id="password" placeholder="Enter password" required>
+                            </div>
+                            </form>
+                        </div>
+
+                        <div class="modal-footer">  
+                            <button type="submit" form="loginForm" class="btn btn-primary">Submit</button>
+                        </div>
+
+                        </div>
+                    </div>
+                    </div>
+
+
+
+
+
+        </div>
+
+
+        <div>
+
+
+            <!-- Register modal https://getbootstrap.com/docs/5.0/components/modal/ -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registermodal">
+                Register
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="registermodal" tabindex="-1" aria-labelledby="registermodallabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registermodallabel">Register</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="registerForm" method="POST" action="/register">
+                    <div class="mb-3">
+                        <label for="register_username" class="form-label">Username</label>
+                        <input name="register_username" type="text" class="form-control" id="register_username" placeholder="Enter username" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="register_password" class="form-label">Password</label>
+                        <input name="register_password" type="password" class="form-control" id="register_password" placeholder="Enter password" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="con_register_password" class="form-label">Confirm Password</label>
+                        <input name="con_register_password" type="password" class="form-control" id="con_register_password" placeholder="Enter password" required>
+                    </div>
+
+                    </form>
+                </div>
+
+                <div class="modal-footer">  
+                    <button type="submit" form="registerForm" class="btn btn-primary">Submit</button>
+                </div>
+
+                </div>
+            </div>
+            </div>
+
+
+        </div>
+
+    </body>
+</html>
